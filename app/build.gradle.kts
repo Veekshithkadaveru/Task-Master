@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.taskmaster"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.taskmaster"

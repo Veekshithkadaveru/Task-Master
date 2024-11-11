@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.taskmaster.model.Task
 
@@ -42,7 +43,7 @@ fun TaskCard(task: Task, onDelete: () -> Unit, onEdit: () -> Unit) {
             Column {
                 Text(
                     text = task.title,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(4.dp))
@@ -76,5 +77,12 @@ fun TaskCard(task: Task, onDelete: () -> Unit, onEdit: () -> Unit) {
                 }
             }
         }
+    }
+}
+@Composable
+@Preview(showBackground = true)
+private fun TaskCardPreview(){
+    TaskCard(task = Task(title = "Blank", description = "Nothing to display here"), onDelete = { /*TODO*/ }) {
+        
     }
 }
