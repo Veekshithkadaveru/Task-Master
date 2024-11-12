@@ -5,16 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.example.taskmaster.model.Task
 import com.example.taskmaster.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(private val repository: TaskRepository) : ViewModel() {
 
-    private val _tasks = MutableStateFlow<List<Task>>(emptyList())
-    val tasks: StateFlow<List<Task>> = _tasks
+    val tasks: StateFlow<List<Task>> = repository.getTasks()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     init {
         loadTasks()
@@ -22,7 +23,7 @@ class TaskViewModel @Inject constructor(private val repository: TaskRepository) 
 
     private fun loadTasks() {
         viewModelScope.launch {
-            _tasks.value = repository.getTasks()
+            repository.getTasks()
         }
     }
 
