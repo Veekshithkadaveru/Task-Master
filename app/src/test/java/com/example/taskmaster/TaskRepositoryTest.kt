@@ -22,7 +22,7 @@ class TaskRepositoryTest {
     }
 
     @Test
-    fun `verify getTasks returns flow of tasks`()= runTest {
+    fun `verify getTasks returns flow of tasks`() = runTest {
 
         val taskList = listOf(Task(id = 1, title = "Test Task", description = "Test Description"))
         coEvery { taskDao.getTasks() } returns flowOf(taskList)
